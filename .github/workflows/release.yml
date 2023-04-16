@@ -43,10 +43,11 @@ jobs:
     - name: Import Signing Certificates
       uses: apple-actions/import-codesign-certs@v1
       with:
-        p12-file-base64: ${{ env.APPLE_CERTS }}
-        p12-password: ${{ env.APPLE_CERTS_PASSWORD }}
-#        p12-file-base64: ${{ secrets.APPLE_CERTS }}
-#        p12-password: ${{ secrets.APPLE_CERTS_PASSWORD }}
+        p12-file-base64: ${{ secrets.APPLE_CERTS }}
+        p12-password: ${{ secrets.APPLE_CERTS_PASSWORD }}
+        keychain: manual_keychain
+        keychain-password: Rswift7
+        create-keychain: false
     - name: Code Sign
       run: |
         codesign --force --options runtime --sign "$IDENTITY" .build/apple/Products/Release/rswift
