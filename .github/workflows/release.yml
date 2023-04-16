@@ -40,9 +40,11 @@ jobs:
 #    - name: Delete temp keychain
 #      run: |
 #        /usr/bin/security delete-keychain signing_temp.keychain || true
-#    - name: Import Signing Certificates
-#      uses: apple-actions/import-codesign-certs@v1
-#      with:
+    - name: Import Signing Certificates
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-file-base64: ${{ env.APPLE_CERTS }}
+        p12-password: ${{ env.APPLE_CERTS_PASSWORD }}
 #        p12-file-base64: ${{ secrets.APPLE_CERTS }}
 #        p12-password: ${{ secrets.APPLE_CERTS_PASSWORD }}
     - name: Code Sign
